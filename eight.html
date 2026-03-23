@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Our 8 Months </title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:'Poppins', sans-serif;
+  background:linear-gradient(180deg,#dff3ff 0%, #cbe9ff 100%);
+  min-height:100vh;
+  overflow-y:auto;
+  overflow-x:hidden;
+}
+
+.page-wrap{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:24px 0;
+}
+
+.screen{
+  width:360px;
+  max-width:92vw;
+  background:white;
+  border-radius:24px;
+  padding:25px 22px;
+  text-align:center;
+  box-shadow:0 8px 24px rgba(0,0,0,.08);
+  margin:20px auto;
+  animation:fadeIn .5s ease;
+}
+
+.hidden{
+  display:none;
+}
+
+.title{
+  font-family:'Pacifico', cursive;
+  color:#4da6ff;
+  font-size:24px;
+  margin-bottom:10px;
+}
+
+.subtitle{
+  color:#5d7d97;
+  font-size:14px;
+  line-height:1.7;
+}
+
+.btn{
+  display:inline-block;
+  padding:11px 20px;
+  border:none;
+  border-radius:999px;
+  cursor:pointer;
+  font-size:15px;
+  margin:15px auto 0;
+  font-family:'Poppins', sans-serif;
+  text-align:center;
+  transition:.25s ease;
+}
+
+.btn:hover{
+  transform:translateY(-1px);
+}
+
+.primary{
+  background:#66b3ff;
+  color:white;
+  box-shadow:0 8px 20px rgba(102,179,255,.25);
+}
+
+.secondary{
+  background:#eaf5ff;
+  color:#3f7fb4;
+}
+
+.reject{
+  background:#edf6ff;
+  color:#608eb8;
+}
+
+input{
+  padding:12px;
+  width:84%;
+  margin-top:12px;
+  border-radius:12px;
+  border:1px solid #cfe1ee;
+  outline:none;
+  font-size:14px;
+}
+
+.cute-img{
+  width:110px;
+  height:110px;
+  object-fit:cover;
+  border-radius:20px;
+  margin-bottom:12px;
+  box-shadow:0 8px 18px rgba(0,0,0,.08);
+}
+
+.letter-box{
+  text-align:left;
+  background:#f7fbff;
+  border:1px solid #dbeefd;
+  border-radius:18px;
+  padding:16px;
+  line-height:1.8;
+  color:#5a7891;
+  font-size:13px;
+}
+
+.gallery{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  margin-top:18px;
+}
+
+.memory-card{
+  background:linear-gradient(180deg,#ffffff 0%, #f7fbff 100%);
+  border:1px solid #d8ecfa;
+  border-radius:22px;
+  padding:14px;
+  box-shadow:0 8px 20px rgba(82,142,191,.08);
+  text-align:left;
+}
+
+.museum-img,
+.museum-video{
+  width:100%;
+  height:210px;
+  object-fit:cover;
+  border-radius:18px;
+  display:block;
+  margin:0 0 12px 0;
+  border:1px solid #dcecf9;
+  background:#eef7ff;
+}
+
+.memory-badge{
+  display:block;
+  width:fit-content;
+  margin:0 auto 10px auto;
+  padding:7px 12px;
+  border-radius:999px;
+  background:#eaf5ff;
+  color:#4c7ba3;
+  font-size:12px;
+  font-weight:600;
+  text-align:center;
+}
+
+.memory-text{
+  font-size:13px;
+  color:#5d7b95;
+  line-height:1.8;
+  text-align:left;
+  margin:0 auto;
+  width:94%;
+}
+
+.reasons-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:14px;
+}
+
+.reason-card{
+  background:#f4fbff;
+  border:1px solid #d8ecfa;
+  border-radius:18px;
+  padding:14px 10px;
+  font-size:12px;
+  color:#496983;
+  line-height:1.5;
+  min-height:105px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+.proposal-ring{
+  font-size:50px;
+  margin:8px 0 6px;
+}
+
+.btn-row{
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  gap:10px;
+  margin-top:18px;
+  min-height:56px;
+}
+
+.question{
+  color:#467aa7;
+  font-size:18px;
+  line-height:1.5;
+  margin-top:4px;
+  font-weight:600;
+}
+
+/* ===== CERTIFICATE ===== */
+.certificate{
+  background:#fffef9;
+  border:10px double #c9a43b;
+  padding:40px 25px;
+  border-radius:6px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.no-effects::before,
+.no-effects::after{
+  display:none !important;
+}
+
+.certificate::before{
+  content:"";
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  width:220px;
+  height:220px;
+  border:3px solid rgba(201,164,59,0.15);
+  border-radius:50%;
+}
+
+.cert-title{
+  font-family:'Great Vibes', cursive;
+  font-size:38px;
+  color:#b8962e;
+  position:relative;
+  z-index:1;
+}
+
+.cert-sub{
+  font-size:11px;
+  letter-spacing:3px;
+  color:#555;
+  margin-bottom:20px;
+  position:relative;
+  z-index:1;
+}
+
+.cert-text{
+  font-size:14px;
+  color:#222;
+  margin:12px 0;
+  line-height:1.6;
+  position:relative;
+  z-index:1;
+}
+
+.cert-divider{
+  width:70%;
+  height:1px;
+  background:#c9a43b;
+  margin:20px auto;
+  position:relative;
+  z-index:1;
+}
+
+.names{
+  font-family:'Great Vibes', cursive;
+  font-size:32px;
+  margin:20px 0;
+  color:#111;
+  position:relative;
+  z-index:1;
+}
+
+.signature-container{
+  display:flex;
+  justify-content:space-between;
+  margin-top:40px;
+  gap:16px;
+  position:relative;
+  z-index:1;
+}
+
+.signature-block{
+  width:48%;
+  text-align:center;
+}
+
+.signature-line{
+  border-top:1px solid #000;
+  margin-bottom:5px;
+}
+
+.signature-name{
+  font-family:'Great Vibes', cursive;
+  font-size:18px;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="page-wrap">
+
+  <!-- INTRO -->
+  <div class="screen" id="intro">
+    <img src="fa8be1eec6fdb4b776fae175de5c8fa8.jpg" alt="cute" class="cute-img">
+    <div class="title">For my sweetest girl </div>
+    <p class="subtitle">Tap to begin…</p>
+    <button class="btn primary" onclick="startExperience()">Start</button>
+  </div>
+
+  <!-- HOME -->
+  <div class="screen hidden" id="home">
+    <div class="title">Happy 8 Months Anniversary myyy kittyy</div>
+    <p class="subtitle">
+       i made something for you hehe go ahead.
+    </p>
+    <button class="btn primary" onclick="goToLetter()">I have something to ask…</button>
+  </div>
+
+  <!-- LETTER -->
+  <div class="screen hidden" id="letter">
+    <div class="title"> my dearest star </div>
+    <div class="letter-box">
+     Eight months ago, my life was still ordinary.
+  Then you arrived, and nothing has felt untouched since.
+  It is strange how a person can live so far away
+  and still become the closest thing in your world.
+  You found your way into my mornings,
+  into my sleepless nights, into the smallest pauses of my day,
+  until loving you no longer felt like something I did,
+  but something I had become.
+  <br><br>
+  We have lived inside distance,
+  and still made something tender out of it.
+  Out of voice calls, late replies, longing, patience,
+  and all the unbearable sweetness of missing each other,
+  we made a kind of love that refused to disappear.
+  And if these eight months have taught me anything,
+  it is this: my heart has already chosen you,
+  in more ways than words know how to confess.
+    </div>
+    <button class="btn primary" onclick="goToMuseum()">NEXT </button>
+  </div>
+
+  <!-- MUSEUM -->
+  <div class="screen hidden" id="museum">
+    <div class="title">Before Our Forever Began </div>
+    <p class="subtitle">
+      Before love learned our names, it lived quietly in these little moments.
+    </p>
+
+    <div class="gallery">
+      <div class="memory-card">
+        <img src="Screenshot_20260323_143749.jpg" alt="Our first chat" class="museum-img">
+        <div class="memory-badge">Our first haii</div>
+        <p class="memory-text">
+          The beginning of us was so absurdly small that, had I not lived through it, I might not have believed in it at all.
+          You slid into my messages with a silly Doraemon reel, sent only because we had spoken of it in the group chat the night before.
+          Nothing in that moment seemed sacred. And still, when I look back now, it feels almost unbearable to think that something so simple,
+          so careless, was already carrying the weight of everything that would follow.
+        </p>
+      </div>
+
+      <div class="memory-card">
+        <video class="museum-video" controls playsinline>
+          <source src="Screenrecording_20260323_143948.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="memory-badge">The day we became ours</div>
+        <p class="memory-text">
+          I still remember that night as if it belonged less to memory than to some trembling dream.
+          We were both so nervous, so full of fear and wonder, that everything around us seemed unreal, like a scene from a film too tender to survive the morning.
+          There were butterflies, yes, but also that strange quiet terror that comes when happiness stands too close to you.
+          And even now, what makes me smile most is that in the middle of all my shaking hesitation, when I was too much of a coward to say the words,
+          you had to tell me, “ask me out goddammit.” It was absurd, it was perfect, and it was so completely ours.
+        </p>
+      </div>
+
+      <div class="memory-card">
+        <img src="IMG_20260323_164043.jpg" alt="Our first call" class="museum-img">
+        <div class="memory-badge">Our first call</div>
+        <p class="memory-text">
+          The day we called for the first time still feels strangely delicate in my memory.
+          I was nervous, frightened even, as though something as simple as hearing your voice could alter me in ways I was not prepared for.
+          And perhaps it did.
+          We said only a soft little hi, and then went on doing our own things, almost as if nothing extraordinary was happening.
+          Yet there was something quietly beautiful in that silence, in that ordinary sharing of time.
+          The call did not need grand words to matter. It only needed your presence.
+          Somehow, that was enough to make me feel closer to you than before, as though a distance I had been carrying inside me had, for a moment, disappeared.
+        </p>
+      </div>
+    </div>
+    <button class="btn primary" onclick="goToReasons()">NEXT </button>
+  </div>
+
+  <!-- REASONS -->
+  <div class="screen hidden" id="reasons">
+    <div class="title">Little reasons why I love you </div>
+    <div class="reasons-grid">
+      <div class="reason-card">You make even ordinary days feel strangely beautiful.</div>
+      <div class="reason-card">Your voice can calm storms I never say out loud.</div>
+      <div class="reason-card">Even silence becomes soft when it is shared with you.</div>
+      <div class="reason-card">You became my favorite thought without asking permission.</div>
+      <div class="reason-card">Because loving you does not feel like effort; it feels like returning to where I belong.</div>
+      <div class="reason-card">Because you are the person my heart reaches for before my mind even knows it is lonely.</div>
+      <div class="reason-card">Because missing you has only taught me how deeply I belong to you.</div>
+      <div class="reason-card">Because when every reason has been spoken, the truest one still remains I simply love you.</div>
+    </div>
+    <button class="btn primary" onclick="goToProposal()">Now, I need to ask you something…ahem</button>
+  </div>
+
+  <!-- PROPOSAL -->
+  <div class="screen hidden" id="proposal">
+    <div class="proposal-ring">💍</div>
+    <div class="title">Will you marry me?</div>
+    <div class="question">
+      Will you let me keep loving you like this, for the rest of my life?
+    </div>
+
+    <div class="btn-row">
+      <button class="btn primary" onclick="goToNameInput()">Accept (this click click ehehe)</button>
+      <button class="btn reject" id="rejectBtn">Reject (not this one omg)</button>
+    </div>
+  </div>
+
+  <!-- NAME INPUT -->
+  <div class="screen hidden" id="names">
+    <div class="title">Seal it with our names </div>
+    <input id="yourName" placeholder="Your Name">
+    <input id="herName" placeholder="Her Name">
+    <button class="btn primary" onclick="showCertificate()">Create Certificate 💙</button>
+  </div>
+
+  <!-- CERTIFICATE -->
+  <div class="screen hidden" id="certificate">
+    <div class="certificate" id="certificateContent">
+      <div class="cert-title">Certificate of forever</div>
+      <div class="cert-sub">OFFICIALLY RECOGNIZED & SEALED</div>
+
+      <div class="cert-divider"></div>
+
+      <p class="cert-text">This is to formally certify that</p>
+
+      <div class="names" id="certNames"></div>
+
+      <p class="cert-text">
+        have entered into a solemn and enduring union,
+        founded upon mutual devotion, trust, and companionship.
+      </p>
+
+      <p class="cert-text">
+        This certificate acknowledges their promise to remain
+        beside one another through all seasons of life,
+        bound not by obligation, but by choice again and again.
+      </p>
+
+      <div class="cert-divider"></div>
+
+      <p class="cert-text">
+        Issued on this day:
+        <strong><span id="date"></span></strong>
+      </p>
+
+      <div class="signature-container">
+        <div class="signature-block">
+          <div class="signature-line"></div>
+          <div class="signature-name" id="sign1"></div>
+        </div>
+
+        <div class="signature-block">
+          <div class="signature-line"></div>
+          <div class="signature-name" id="sign2"></div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn primary" onclick="downloadPDF()">Download Certificate PDF </button>
+  </div>
+
+</div>
+
+<script>
+function showScreen(id){
+  const screens = document.querySelectorAll('.screen');
+  screens.forEach(screen => screen.classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
+}
+
+function startExperience(){
+  showScreen('home');
+}
+
+function goToLetter(){
+  showScreen('letter');
+}
+
+function goToMuseum(){
+  showScreen('museum');
+}
+
+function goToReasons(){
+  showScreen('reasons');
+}
+
+function goToProposal(){
+  showScreen('proposal');
+}
+
+function goToNameInput(){
+  showScreen('names');
+}
+
+function showCertificate(){
+  showScreen('certificate');
+
+  const yourName = document.getElementById('yourName').value || "You";
+  const herName = document.getElementById('herName').value || "Her";
+
+  document.getElementById('certNames').innerText = yourName + " 💙 " + herName;
+  document.getElementById('sign1').innerText = yourName;
+  document.getElementById('sign2').innerText = herName;
+  document.getElementById('date').innerText = new Date().toDateString();
+}
+
+async function downloadPDF(){
+  const { jsPDF } = window.jspdf;
+  const cert = document.getElementById("certificateContent");
+
+  cert.classList.add("no-effects");
+
+  const canvas = await html2canvas(cert, {
+    scale: 3,
+    useCORS: true,
+    backgroundColor: "#fffef9"
+  });
+
+  const imgData = canvas.toDataURL("image/png");
+  const pdf = new jsPDF("p", "mm", "a4");
+
+  const pageWidth = pdf.internal.pageSize.getWidth();
+  const pageHeight = pdf.internal.pageSize.getHeight();
+
+  const imgWidth = pageWidth - 20;
+  const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+  if (imgHeight <= pageHeight - 20) {
+    pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
+  } else {
+    const scale = (pageHeight - 20) / imgHeight;
+    const finalWidth = imgWidth * scale;
+    const finalHeight = imgHeight * scale;
+    const x = (pageWidth - finalWidth) / 2;
+    pdf.addImage(imgData, "PNG", x, 10, finalWidth, finalHeight);
+  }
+
+  pdf.save("certificate.pdf");
+  cert.classList.remove("no-effects");
+}
+
+let size = 1;
+let clicks = 0;
+const rejectBtn = document.getElementById('rejectBtn');
+
+rejectBtn.addEventListener('click', ()=>{
+  clicks++;
+  size -= 0.2;
+  rejectBtn.style.transform = `scale(${size})`;
+
+  if(clicks >= 5){
+    rejectBtn.style.display = "none";
+  }
+});
+</script>
+
+</body>
+</html>
